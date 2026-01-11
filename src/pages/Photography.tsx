@@ -1,23 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import Layout from "@/components/Layout";
-
-interface Photo {
-  id: number;
-  src: string;
-  caption?: string;
-}
-
-const photos: Photo[] = [
-  { id: 1, src: "/placeholder.svg", caption: "[Location / Mood]" },
-  { id: 2, src: "/placeholder.svg", caption: "[Location / Mood]" },
-  { id: 3, src: "/placeholder.svg" },
-  { id: 4, src: "/placeholder.svg", caption: "[Location / Mood]" },
-  { id: 5, src: "/placeholder.svg" },
-  { id: 6, src: "/placeholder.svg", caption: "[Location / Mood]" },
-  { id: 7, src: "/placeholder.svg" },
-  { id: 8, src: "/placeholder.svg", caption: "[Location / Mood]" },
-  { id: 9, src: "/placeholder.svg" },
-];
+import { Photo, photos } from "@/data/photos";
 
 const Photography = () => {
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
@@ -64,7 +47,7 @@ const Photography = () => {
           <h1 className="mb-10">Photography</h1>
 
           {/* Grid */}
-          <div 
+          <div
             className="grid grid-cols-2 md:grid-cols-3 gap-1"
             role="list"
             aria-label="Photo gallery"
@@ -137,7 +120,7 @@ const Photography = () => {
             →
           </button>
 
-          <div 
+          <div
             className="max-w-4xl w-full"
             onClick={(e) => e.stopPropagation()}
           >

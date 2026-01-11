@@ -8,12 +8,12 @@ const Index = () => {
         <div className="container-narrow">
           <div className="py-8 md:py-16 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-10 md:gap-16">
             <div className="flex-1">
-              <h1 className="mb-4">[Your Name]</h1>
+              <h1 className="mb-4">Rajat Shriram</h1>
               <p className="text-lg text-muted-foreground mb-6 max-w-xl">
-                [Role placeholder — e.g., Backend Engineer & Photographer]
+                I build backend systems with FastAPI and PostgreSQL, and practice photography as a disciplined creative craft.
               </p>
               <p className="text-foreground/80 mb-10 max-w-lg">
-                [One-line description placeholder — what you do and care about]
+                I build backend systems with strong foundations, preparing them for scale and operational reliability.
               </p>
 
               <div className="flex flex-wrap gap-3">

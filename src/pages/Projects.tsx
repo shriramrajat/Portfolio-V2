@@ -1,41 +1,6 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
-
-interface Project {
-  id: string;
-  name: string;
-  problem: string;
-  stack: string[];
-  scope: string;
-  status: "complete" | "in-progress" | "planned";
-}
-
-const projects: Project[] = [
-  {
-    id: "project-1",
-    name: "[Project Name 1]",
-    problem: "[One-line problem statement placeholder]",
-    stack: ["[Tech 1]", "[Tech 2]", "[Tech 3]"],
-    scope: "[Scope placeholder — e.g., Personal / Academic / Freelance]",
-    status: "complete",
-  },
-  {
-    id: "project-2",
-    name: "[Project Name 2]",
-    problem: "[One-line problem statement placeholder]",
-    stack: ["[Tech 1]", "[Tech 2]"],
-    scope: "[Scope placeholder]",
-    status: "in-progress",
-  },
-  {
-    id: "project-3",
-    name: "[Project Name 3]",
-    problem: "[One-line problem statement placeholder]",
-    stack: ["[Tech 1]", "[Tech 2]", "[Tech 3]", "[Tech 4]"],
-    scope: "[Scope placeholder]",
-    status: "planned",
-  },
-];
+import { projects } from "@/data/projects";
 
 const statusLabel = {
   complete: "Complete",

@@ -24,11 +24,10 @@ const Layout = ({ children }: LayoutProps) => {
               <li key={link.path}>
                 <Link
                   to={link.path}
-                  className={`no-underline font-medium ${
-                    location.pathname === link.path
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`no-underline font-medium ${location.pathname === link.path
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                    }`}
                   aria-current={location.pathname === link.path ? "page" : undefined}
                 >
                   {link.label}
@@ -43,7 +42,7 @@ const Layout = ({ children }: LayoutProps) => {
 
       <footer className="border-t border-border py-8 mt-auto">
         <div className="container-narrow text-sm text-muted-foreground">
-          <p className="m-0">© {new Date().getFullYear()} [Your Name]</p>
+          <p className="m-0">© {new Date().getFullYear()} Rajat Shriram</p>
         </div>
       </footer>
     </div>
