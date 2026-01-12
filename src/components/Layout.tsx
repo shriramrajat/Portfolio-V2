@@ -1,4 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Menu } from "lucide-react";
 
 const navLinks = [
   { path: "/", label: "Home" },
@@ -17,9 +20,10 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b border-border">
-        <nav className="container-narrow py-4" aria-label="Main navigation">
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm list-none m-0 p-0">
+      <header className="border-b border-border sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <nav className="container-narrow py-4 flex items-center justify-between md:block" aria-label="Main navigation">
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex flex-wrap gap-x-6 gap-y-2 text-sm list-none m-0 p-0">
             {navLinks.map((link) => (
               <li key={link.path}>
                 <Link
@@ -35,6 +39,36 @@ const Layout = ({ children }: LayoutProps) => {
               </li>
             ))}
           </ul>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden flex w-full justify-between items-center">
+            <span className="font-medium text-sm">Menu</span>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="-mr-2">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <div className="flex flex-col gap-6 mt-8">
+                  {navLinks.map((link) => (
+                    <SheetClose asChild key={link.path}>
+                      <Link
+                        to={link.path}
+                        className={`text-lg font-medium ${location.pathname === link.path
+                            ? "text-primary"
+                            : "text-muted-foreground hover:text-foreground"
+                          }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </SheetClose>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </nav>
       </header>
 
