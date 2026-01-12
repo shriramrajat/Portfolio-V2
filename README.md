@@ -1,55 +1,84 @@
 # Rajat Shriram | Portfolio
 
-**Live URL**: [https://port-folio-omega-jade.vercel.app](https://port-folio-omega-jade.vercel.app)
+A minimalist, high-performance portfolio website built with modern web technologies. Designed to be a stable "living document" of my engineering work and photography.
 
-## 🧊 UI STATUS: FROZEN
+**[View Live Site →](https://port-folio-omega-jade.vercel.app)**
 
-**This project is in "Maintenance Mode" regarding its design and interface.**
+---
 
-The UI/UX is considered **complete and stable**. Use this repository as a document of work, not a design playground.
+## ❄️ Maintenance Status: FROZEN UI
 
-### 🚫 STRICT PROHIBITIONS
-*   **NO** Redesigns
-*   **NO** New Sections
-*   **NO** UI Experiments or "Tweaks"
+**The design and architecture of this project are locked.**
+This repository represents a finished product interface. The focus going forward is strictly on content updates (adding new projects or photos) and maintaining stability.
 
-### ✅ ALLOWED UPDATES
-*   **Content**: Updating text, descriptions, and biographies.
-*   **Projects**: Adding new case studies to `src/data/projects.ts`.
-*   **Photography**: Adding new images to `src/data/photos.ts`.
+- **✅ Allowed**: Content updates, adding new projects/photos, critical bug fixes.
+- **❌ Prohibited**: Redesigns, adding new UI sections, experimental features.
 
 ---
 
 ## 🛠️ Tech Stack
-*   **Framework**: React + Vite
-*   **Type Safety**: TypeScript
-*   **Styling**: Tailwind CSS (Shadcn UI components)
-*   **Deployment**: Vercel
 
-## 📂 How to Add Content
+- **Core**: React 18, TypeScript, Vite
+- **Styling**: Tailwind CSS, Shadcn/UI (Radix Primitives)
+- **Deployment**: Vercel
+- **Linting**: ESLint
 
-### Adding a New Project
-1.  Navigate to `src/data/projects.ts`.
-2.  Add a new entry to the `projects` array following the `Project` interface.
-3.  The UI will automatically render the new card and detail page.
+## 📂 Project Structure
 
-### Adding Photography
-1.  Navigate to `src/data/photos.ts`.
-2.  Add a new entry to the `photos` array.
-3.  Ensure images are optimized (WebP/JPEG, <300KB) before importing.
+```
+src/
+├── components/   # UI Components (Layout, Shadcn primitives)
+├── data/         # Content Source of Truth (Projects, Photos)
+├── pages/        # Route Components (Home, Projects, etc.)
+└── index.css     # Global Styles & Tailwind Config
+```
 
-## 🚀 Running Locally
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18+)
+- npm
+
+### Installation
 
 ```bash
+# Install dependencies
 npm install
+```
+
+### Development
+
+```bash
+# Start local dev server
 npm run dev
 ```
 
-## 📦 Deployment
-
-Deployments are automated via Vercel.
+### Production Build
 
 ```bash
-# To trigger a manual deployment
-npx vercel --prod
+# Build for production
+npm run build
 ```
+
+---
+
+## 📝 Managing Content
+
+### Adding a New Project
+1.  Navigate to `src/data/projects.ts`.
+2.  Add a new entry to the `projects` array adhering to the `Project` interface.
+3.  The UI will automatically generate the card and detail page.
+
+### Adding Photography
+1.  Add your optimized image (WebP/JPEG, <300KB) to the `public/` directory.
+2.  Navigate to `src/data/photos.ts`.
+3.  Add a new entry referencing the image path.
+
+---
+
+## 📄 License
+
+© 2026 Rajat Shriram. All Rights Reserved.
