@@ -30,7 +30,7 @@ const Index = () => {
             <div className="flex-shrink-0 flex justify-center md:justify-end">
               <div className="w-28 h-28 md:w-36 md:h-36 rounded-full bg-muted border border-border overflow-hidden">
                 <img
-                  src="/placeholder.svg"
+                  src="/profile-pic.jpeg"
                   alt="Profile photo"
                   className="w-full h-full object-cover"
                   loading="lazy"
