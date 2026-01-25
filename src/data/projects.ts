@@ -81,30 +81,92 @@ export const projects: Project[] = [
     },
     {
         id: "project-3",
-        name: "Smart Darshan Slot Booking System",
-        problem: "Manual darshan booking and crowd control in temples leads to long wait times, poor capacity utilization, and safety risks during peak hours.",
-        stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
-        scope: "Team Project",
-        status: "in-progress",
-        overview: "A full-stack web application for managing temple darshan bookings through time-based slots, QR-based entry verification, and role-based access for devotees, staff, and administrators. The system centralizes booking, validation, and monitoring to reduce crowd congestion and improve operational visibility.",
-        motivation: "The project was built to address real-world crowd management and scheduling issues in high-footfall religious spaces, where safety, predictability, and operational clarity are critical. It also provided an opportunity to work on a role-driven system with real database constraints and operational workflows.",
-        architecture: "Monolithic full-stack application built with Next.js App Router, using server-side API routes, PostgreSQL with Prisma ORM for data persistence, and role-based access control for devotees, staff, and administrators.",
+        name: "AI Resume Analyzer",
+        problem: "Recruitment AI tools are often 'black boxes' that suffer from hallucinations, bias, and lack of explainability, making it impossible to trust their automated rejections.",
+        stack: ["FastAPI", "Python", "PostgreSQL", "React", "OpenAI"],
+        scope: "Engineering Project",
+        status: "complete",
+        overview: "A production-grade resume analysis system that prioritizes determinism and transparency over 'AI Magic'. It uses a strict pipeline where structure extraction and scoring are rule-based, and LLMs are restricted solely to explaining the results, ensuring 100% reproducibility and no hallucinations.",
+        motivation: "I wanted to challenge the trend of 'wrapping everything in an LLM' by building a system where critical logic remains deterministic. Acceptance decisions in recruitment are high-stakes, and I believe they require mathematical auditability, not probabilistic guessing.",
+        architecture: "Pipeline architecture with strict separation of concerns: Ingestion (pdfplumber) → Deterministic Parsing & Ontology Matching (No AI) → Weighted Scoring Formula → Explanation Layer (LLM). AI is explicitly banned from the scoring layer.",
         techDetails: [
-            { category: "Frontend", value: "Next.js App Router with TypeScript for server-rendered and client components" },
-            { category: "Backend", value: "Next.js API routes handling booking logic, QR verification, and admin operations" },
-            { category: "Database", value: "PostgreSQL with Prisma ORM for schema enforcement and relational integrity" },
-            { category: "Auth & Services", value: "NextAuth.js for authentication and Resend for transactional emails" }
+            { category: "Backend", value: "FastAPI with Python for logic-heavy processing and background tasks" },
+            { category: "Database", value: "PostgreSQL with strict schemas for resumes, jobs, and results" },
+            { category: "Core Logic", value: "Custom matching engine using weighted formulas (70% Skill, 30% Experience)" },
+            { category: "AI Strategy", value: "LLM (OpenAI) restricted to 'Explanation Layer' only; banned from scoring" }
         ],
         challenges: [
-            "Designing slot and booking schemas that enforce capacity limits while remaining flexible for administrative changes",
-            "Implementing reliable QR-based verification and role-based access without overcomplicating the system"
+            "Building a robust heuristic parser for PDFs that outperforms AI vision models in speed and cost",
+            "Defining a 'Skill Ontology' that captures nuances without hallucinating matches",
+            "Enforcing strict architectural boundaries to prevent 'AI creep' into the deterministic scoring layer"
         ],
         learnings: [
-            "How database schema design directly affects business rules like capacity control and booking validation",
-            "Managing role-based workflows and permissions in a real-world multi-user system"
+            "The power of 'Sandboxed AI': Using LLMs only where their creativity adds value, not where their randomness creates risk",
+            "Designing mathematical scoring models that align with human recruiter intuition",
+            "How to architect for 'Explainability' as a first-class feature, not an afterthought"
         ],
         links: {
-            github: "https://github.com/shriramrajat/Temple-Crowd-Management"
+            github: "https://github.com/shriramrajat/AiResumeAnalyzer"
+        }
+    },
+    {
+        id: "project-4",
+        name: "API Monitor System",
+        problem: "Synchronous logging creates latency bottlenecks. If the database slows down, user experience suffers. additionally, querying millions of log rows linearly for debugging makes forensics painfully slow.",
+        stack: ["FastAPI", "Python", "PostgreSQL", "AsyncPG", "OpenAI"],
+        scope: "Engineering Project",
+        status: "complete",
+        overview: "A high-performance, asynchronous API logging and monitoring architecture built with FastAPI. It intercepts requests via middleware and offloads logging to background tasks to ensure zero latency impact. Features include read-optimized composite indices, background aggregation for dashboards, and AI-driven incident summarization.",
+        motivation: "I operated on the philosophy that 'Observability should never be the bottleneck.' I wanted to demonstrate a production-grade pipeline where high-volume logging/monitoring happens completely out-of-band from the critical user request path.",
+        architecture: "Zero-overhead 'Wire Tap' architecture using Middleware + Background Tasks. Writes are asynchronous to avoid blocking response. Database uses composite indices for instant temporal queries. Aggregations are pre-computed by background workers.",
+        techDetails: [
+            { category: "Ingestion Strategy", value: "Middleware captures payload, hands off to background task (Zero-Overhead)" },
+            { category: "Database Design", value: "PostgreSQL with composite indices (timestamp, status_code) for fast filtering" },
+            { category: "Optimization", value: "Pre-computed aggregation tables for instant dashboard loading" },
+            { category: "AI Integration", value: "OpenAI used for explaining stack traces, not for detection (Human-in-the-loop)" }
+        ],
+        challenges: [
+            "Designing a logging system that remains invisible to the main application's latency budget",
+            "Handling large stack traces and preventing database bloat through intelligent truncation",
+            "Balancing write-heavy ingestion with read-heavy dashboard queries using specific indexing strategies"
+        ],
+        learnings: [
+            "How to strictly decouple non-critical write operations from the user request loop",
+            "Deep understanding of database indexing strategies for time-series + attribute queries",
+            "The distinction between detection (Math) and explanation (AI) in observability systems"
+        ],
+        links: {
+            github: "https://github.com/shriramrajat/APIMoniterSystem"
+        }
+    },
+    {
+        id: "project-5",
+        name: "SentinelAuth",
+        problem: "Managing identity, authentication, and granular permissions across multiple applications is complex, prone to security vulnerabilities, and often leads to duplicated logic and fractured trust boundaries.",
+        stack: ["FastAPI", "Python", "PostgreSQL", "SQLAlchemy", "Alembic", "JWT"],
+        scope: "Engineering Project",
+        status: "in-progress",
+        overview: "A centralized identity and access control service designed to handle user authentication, role-based permission enforcement, and secure session management. It serves as a dedicated source of truth for identity, abstracting complex security logic away from client applications.",
+        motivation: "I wanted to build a production-ready authentication system from first principles to deeply understand security patterns like JWT rotation, RBAC, and session management, rather than relying on 'magic' third-party providers.",
+        architecture: "Strict layered architecture (API → Service → Repository → Database) ensuring separation of concerns. Uses JWT for stateless access with stateful refresh tokens for session control, backed by PostgreSQL and SQLAlchemy.",
+        techDetails: [
+            { category: "Backend Architecture", value: "FastAPI with a strict Service-Repository pattern for modularity" },
+            { category: "Security", value: "Bcrypt hashing, JWT access tokens, and rotating refresh tokens" },
+            { category: "Database", value: "PostgreSQL with SQLAlchemy ORM and Alembic for reliable migrations" },
+            { category: "Authorization", value: "Granular Role-Based Access Control (RBAC) middleware" }
+        ],
+        challenges: [
+            "Implementing a secure refresh token rotation strategy that handles race conditions and multi-device sessions",
+            "Designing a flexible RBAC system that allows granular permission enforcement without cluttering business logic",
+            "maintaining strict architectural boundaries to ensure testability and prevent circular dependencies"
+        ],
+        learnings: [
+            "The intricacies of modern auth flows: Token lifecycles, rotation, and revocation strategies",
+            "How to implement the Repository pattern in Python to decouple database logic from business rules",
+            "Managing database schema evolution in a team environment using Alembic migrations"
+        ],
+        links: {
+            github: "https://github.com/shriramrajat/SentinelAuth"
         }
     }
 ];
