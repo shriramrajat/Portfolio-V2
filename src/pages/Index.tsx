@@ -6,21 +6,21 @@ const Index = () => {
     <Layout>
       <section className="section-spacing">
         <div className="container-narrow">
-          <div className="py-8 md:py-16 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-10 md:gap-16">
+          <div className="py-12 md:py-24 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-12 md:gap-20">
             <div className="flex-1">
-              <h1 className="mb-4">Rajat Shriram</h1>
-              <p className="text-lg text-muted-foreground mb-6 max-w-xl">
+              <h1 className="mb-6 text-4xl md:text-6xl font-bold tracking-tight">Rajat Shriram</h1>
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl leading-relaxed">
                 I build backend systems with FastAPI and PostgreSQL, and practice photography as a disciplined creative craft.
               </p>
-              <p className="text-foreground/80 mb-10 max-w-lg">
+              <p className="text-lg md:text-xl text-foreground/80 mb-12 max-w-xl leading-relaxed">
                 I build backend systems with strong foundations, preparing them for scale and operational reliability.
               </p>
 
-              <div className="flex flex-wrap gap-3">
-                <Link to="/projects" className="btn-primary">
+              <div className="flex flex-wrap gap-4">
+                <Link to="/projects" className="btn-primary text-lg px-8 py-3">
                   Engineering Projects
                 </Link>
-                <Link to="/photography" className="btn-secondary">
+                <Link to="/photography" className="btn-secondary text-lg px-8 py-3">
                   Photography
                 </Link>
               </div>
@@ -28,7 +28,7 @@ const Index = () => {
 
             {/* Profile image */}
             <div className="flex-shrink-0 flex justify-center md:justify-end">
-              <div className="w-28 h-28 md:w-36 md:h-36 rounded-full bg-muted border border-border overflow-hidden">
+              <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl bg-muted border border-border overflow-hidden shadow-sm rotate-3 hover:rotate-0 transition-transform duration-300">
                 <img
                   src="/profile-pic.jpeg"
                   alt="Profile photo"
