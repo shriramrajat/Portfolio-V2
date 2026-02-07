@@ -168,5 +168,35 @@ export const projects: Project[] = [
         links: {
             github: "https://github.com/shriramrajat/SentinelAuth"
         }
+    },
+    {
+        id: "project-6",
+        name: "SentinelRate",
+        problem: "Rate limiting without identity is blind. Standard decorators often fail to distinguish between abusive bot traffic and legitimate heavy users, leading to either porous security or poor user experience.",
+        stack: ["FastAPI", "Python", "Middleware", "Token Bucket"],
+        scope: "Engineering Project",
+        status: "complete",
+        overview: "A high-performance Layer 7 Rate Limiting Middleware designed to protect FastAPI applications from abuse, bursts, and denial-of-service scenarios. Unlike simple decorators, SentinelRate sits at the edge of your application, acting as a decision engine that filters traffic before it reaches your business logic.",
+        motivation: "I wanted to build a rate limiter that is 'Identity First'—applying strict limits to anonymous IPs while allowing flexibility for authenticated users. The goal was to create a zero-latency decision engine that feels invisible to legitimate users but impenetrable to abusers.",
+        architecture: "Middleware pipeline architecture using a Token Bucket algorithm. It features a Dual-Resolution Identity system (JWT + IP), a zero-latency decision engine using time.monotonic(), and an automatic garbage collector for memory safety.",
+        techDetails: [
+            { category: "Core Algorithm", value: "Stateful Token Bucket algorithm allowing controlled bursts" },
+            { category: "Identity Resolution", value: "Dual-Resolution: JWT for users (1000 req/m) vs IP for anon (100 req/m)" },
+            { category: "Observability", value: "Real-time /metrics endpoint and standard RateLimit headers" },
+            { category: "Performance", value: "Zero-latency design with O(1) decision time and memory-safe garbage collection" }
+        ],
+        challenges: [
+            "Designing a decision engine that adds near-zero latency to the request path",
+            "Implementing a Token Bucket algorithm correctly using monotonic time to prevent drift",
+            "Preventing memory leaks from millions of tracking buckets during random-IP DDoS attacks"
+        ],
+        learnings: [
+            "The critical difference between static IP rate limiting and identity-aware traffic control",
+            "How to implement high-performance middleware that handles state safely",
+            "The importance of memory management patterns in long-running Python services"
+        ],
+        links: {
+            github: "https://github.com/shriramrajat/SentinelRate"
+        }
     }
 ];
