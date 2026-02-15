@@ -145,7 +145,7 @@ export const projects: Project[] = [
         problem: "Managing identity, authentication, and granular permissions across multiple applications is complex, prone to security vulnerabilities, and often leads to duplicated logic and fractured trust boundaries.",
         stack: ["FastAPI", "Python", "PostgreSQL", "SQLAlchemy", "Alembic", "JWT"],
         scope: "Engineering Project",
-        status: "in-progress",
+        status: "complete",
         overview: "A centralized identity and access control service designed to handle user authentication, role-based permission enforcement, and secure session management. It serves as a dedicated source of truth for identity, abstracting complex security logic away from client applications.",
         motivation: "I wanted to build a production-ready authentication system from first principles to deeply understand security patterns like JWT rotation, RBAC, and session management, rather than relying on 'magic' third-party providers.",
         architecture: "Strict layered architecture (API → Service → Repository → Database) ensuring separation of concerns. Uses JWT for stateless access with stateful refresh tokens for session control, backed by PostgreSQL and SQLAlchemy.",
@@ -197,6 +197,37 @@ export const projects: Project[] = [
         ],
         links: {
             github: "https://github.com/shriramrajat/SentinelRate"
+        }
+    },
+    {
+        id: "project-7",
+        name: "SentinelStack v1",
+        problem: "Building distinct layers for authentication, rate limiting, and observability across microservices leads to fragmented infrastructure and code duplication. Generic reverse proxies often lack the application-aware context needed for granular control, forcing developers to reinvent security wheels in every service.",
+        stack: ["Python", "FastAPI", "Redis", "PostgreSQL", "Prometheus", "Grafana", "Docker"],
+        scope: "Engineering Project",
+        status: "in-progress",
+        overview: "A production-oriented API Gateway designed to be the hard outer shell of application infrastructure. It sits in front of business logic, providing a unified layer for identity management, deterministic rate limiting, and intelligent observability. Unlike generic proxies, SentinelStack integrates these controls directly into the request lifecycle, ensuring that cross-cutting concerns are handled before traffic reaches the core application.",
+        motivation: "I wanted to move beyond simple reverse proxies and build a 'smart' gateway that enforces security and observability invariants by design. My goal was to create a unified infrastructure layer that guarantees every request is authenticated, rate-limited, and measured before it ever touches business logic.",
+        architecture: "Gateway-First design philosophy. The system uses a middleware pipeline where traffic is first verified by a dual-resolution identity system (JWT/IP), then throttled by a Redis-backed Token Bucket limiter, and finally logged via an asynchronous sidecar pattern to Prometheus. All components represent a cohesive, production-ready stack running on Docker.",
+        techDetails: [
+            { category: "Core Framework", value: "Python 3.10+, FastAPI, Pydantic for high-performance async I/O" },
+            { category: "Database", value: "PostgreSQL (AsyncPG) with SQLAlchemy 2.0" },
+            { category: "Traffic Control", value: "Redis (AsyncIO) + Lua Scripts for atomic, deterministic Rate Limiting" },
+            { category: "Observability", value: "Prometheus for metrics scraping & Grafana for real-time visualization" },
+            { category: "Infrastructure", value: "Docker Compose & GitHub Actions for automated CI/CD pipelines" }
+        ],
+        challenges: [
+            "Ensuring rate limiting decision logic is atomic and race-condition free using Redis Lua scripts",
+            "Integrating a full monitoring stack (Prometheus/Grafana) without introducing latency to the request path",
+            "Designing a CI/CD pipeline that reliably tests full integration flows (Signup → Login → Rate Limit) in ephemeral containers"
+        ],
+        learnings: [
+            "The architectural power of handling cross-cutting concerns at the gateway level rather than in individual services",
+            "How to use Lua scripts to extend Redis functionality for complex, atomic operations",
+            "The operational complexity and benefits of managing a multi-container observability stack with Docker"
+        ],
+        links: {
+            github: "https://github.com/shriramrajat/sentinelstack"
         }
     }
 ];
